@@ -5,7 +5,7 @@
             <contact-list :contacts="contacts" />
           </div>
           <div class="col-8">
-            <contact-details />
+            <contact-details :contact="routeContact" />
           </div>
       </div>
   </div>
@@ -22,10 +22,15 @@ export default {
     data(){
         return{
             contacts: [
-                { name: 'John Doe' },
-                { name: 'Petar Markovic' },
-                { name: 'Mirko Veselinovic' }
+                { id: 1, name: 'John Doe', email: 'doe.joe@example.com', number: '0080-256958' },
+                { id: 2, name: 'Petar Markovic', email: 'petarnjeguspetar@example.com', number: '0080-258966' },
+                { id: 3, name: 'Mirko Veselinovic', email: 'mirkoviks@example.com', number: '0080-589965' }
             ]
+        }
+    },
+    computed:{
+        routeContact(){
+            return this.contacts.find(contact => contact.id == this.$route.params.id)
         }
     }
   
