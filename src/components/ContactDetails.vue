@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <ul class="list-group list-group-flush" v-if="contact">
-        <li class="list-group-item"><i class="fas fa-user fa-fw"></i>{{ contact.name }}</li>
+        <li class="list-group-item"><i class="fas fa-user fa-fw"></i>{{ contact.first_name }}</li>
         <li class="list-group-item"><i class="fas fa-envelope fa-fw"></i>{{ contact.email }}</li>
         <li class="list-group-item"><i class="fas fa-phone fa-fw"></i>{{ contact.number }}</li>
     </ul>

@@ -8,5 +8,12 @@ export default class ContactService
     {
         return axios.post('contacts', contact)
     }
+    getAll()
+        {
+            return axios.get('contacts')
+        }
+    get(id) {
+        return axios.get(`contacts/${id}`)
+    }
 }
 export const contactService = new ContactService()

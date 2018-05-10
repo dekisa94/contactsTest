@@ -8,13 +8,24 @@
       v-for="(contact, key) in contacts" 
       :key="key" 
       >
-      {{contact.name}}
+      {{contact.first_name}} {{contact.last_name}}
       </router-link>
   </div>
 </template>
 
 <script>
+import {contactService} from '../service/ContactService'
 export default {
-  props: ['contacts']
+  data(){
+    return{
+      contacts: []
+    }
+  },
+  created(){
+    contactService.getAll()
+    .then((response) => {
+      this.contacts=response.data
+    })
+  }
 }
 </script>
