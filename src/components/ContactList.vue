@@ -14,18 +14,7 @@
 </template>
 
 <script>
-import {contactService} from '../service/ContactService'
 export default {
-  data(){
-    return{
-      contacts: []
-    }
-  },
-  created(){
-    contactService.getAll()
-    .then((response) => {
-      this.contacts=response.data
-    })
-  }
+  props: ['contacts']
 }
 </script>

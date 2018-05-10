@@ -2,10 +2,10 @@
   <div class="container mt-4">
       <div class="row">
           <div class="col">
-            <contact-list />
+            <contact-list :contacts='contacts'/>
           </div>
           <div class="col-8">
-            <contact-details :contact="routeContact" />
+            <contact-details :contact="routeContact" @onDelete="deleteContact"/>
           </div>
       </div>
   </div>
@@ -38,6 +38,11 @@ export default {
             })
             
         
+    },
+    methods:{
+        deleteContact(id){
+            this.contacts = this.contacts.filter(contact => contact.id !== id)
+        }
     }
   
 }
