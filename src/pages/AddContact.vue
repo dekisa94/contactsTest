@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <form @submit.prevent="submit">
-            <h2>Add contact</h2>
+            <h2>{{ this.$route.params.id ? 'EDIT CONTACT' :  'ADD CONTACT'}}</h2>
             <div class="form-group">
                 <label for="name">First name</label>
                 <input v-model="newContact.first_name" type="text" id="name" name="first_name" class="form-control" required/>
@@ -33,7 +33,24 @@ export default {
   },
   methods:{
       submit(){
-          contactService.addContact(this.newContact)
+          if(this.$route.params.id)
+          {
+              contactService.edit(this.$route.params.id, this.newContact)
+              this.$router.push('/contacts')
+          }else{
+            contactService.addContact(this.newContact)
+            this.$router.push('/contacts')
+          }
+      }
+  },
+  created(){
+      if(this.$route.params.id){
+        contactService.get(this.$route.params.id)
+        .then((response) => {
+            this.newContact=response.data
+        }).catch((error) => {
+            console.log(error)
+        })
       }
   }
 }
