@@ -4,7 +4,15 @@
             <h2>{{ this.$route.params.id ? 'EDIT CONTACT' :  'ADD CONTACT'}}</h2>
             <div class="form-group">
                 <label for="name">First name</label>
-                <input v-model="newContact.first_name" type="text" id="name" name="first_name" class="form-control" required/>
+                <input 
+                    v-focus
+                    v-model="newContact.first_name" 
+                    type="text" 
+                    id="name" 
+                    name="first_name" 
+                    class="form-control" 
+                    required
+                />
             </div>
             <div class="form-group">
                 <label for="lastname">Last name</label>
@@ -36,10 +44,16 @@ export default {
           if(this.$route.params.id)
           {
               contactService.edit(this.$route.params.id, this.newContact)
-              this.$router.push('/contacts')
+              .then(() => {
+                  this.$router.push('/contacts')
+              })
+              
           }else{
             contactService.addContact(this.newContact)
-            this.$router.push('/contacts')
+            .then(() => {
+                this.$router.push('/contacts')
+            })
+            
           }
       }
   },
