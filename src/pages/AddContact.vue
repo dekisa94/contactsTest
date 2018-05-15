@@ -58,7 +58,7 @@ export default {
           validationConfig:{
             validationRules: {email: ['required', 'email']},
             submitCallback:() => {
-                console.log('radi')
+                this.submit()
             }
           }
       }
