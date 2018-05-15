@@ -1,12 +1,11 @@
 <template>
     <div class="container">
-         <form v-validate="validationRules"> 
+         <form v-validate="validationConfig"> 
             <h2>{{ this.$route.params.id ? 'EDIT CONTACT' :  'ADD CONTACT'}}</h2>
             <div class="form-group">
                 <label for="name">First name</label>
                 <input 
                     v-focus
-                    v-validate
                     v-model="newContact.first_name" 
                     type="text" 
                     id="name" 
@@ -56,7 +55,12 @@ export default {
   data(){
       return{
           newContact: {first_name: '', last_name: '', email: '', number: ''},
-          validationRules: {email: ['required', 'email']}
+          validationConfig:{
+            validationRules: {email: ['required', 'email']},
+            submitCallback:() => {
+                console.log('radi')
+            }
+          }
       }
   },
   methods:{
