@@ -9,6 +9,8 @@
         <div class="navbar-nav">
           <router-link class="nav-item nav-link active" to="/contacts">Contacts</router-link>
           <router-link class="nav-item nav-link" to="/add-contact">Add Contact</router-link>
+          <router-link class="nav-item nav-link" to="/login" v-if="isAuthenticated">Login</router-link>
+          <a href="#" class="nav-item nav-link" @click="logout" v-if="!isAuthenticated">Logout</a>
         </div>
       </div>
     </nav>
@@ -16,7 +18,18 @@
 </template>
 
 <script>
+import {authService} from '../service/AuthService'
 export default {
-
+data(){
+  return{
+    isAuthenticated: authService.isAuthenticated()
+  }
+},
+methods:{
+  logout(){
+    authService.logout();
+    this.isAuthenticated = false;
+  }
+}
 }
 </script>
