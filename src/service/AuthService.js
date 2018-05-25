@@ -9,9 +9,12 @@ export default class AuthService
             email, password
         }).then(response => {
             window.localStorage.setItem('loginToken', response.data.token)
-            const TOKEN = `Bearer ${window.localStorage.getItem('loginToken')}`
-            axios.defaults.headers.common['Authorization'] = TOKEN
+            this.setAxiosDefaultAuthorizationHeader();
         })
+    }
+    setAxiosDefaultAuthorizationHeader(){
+        const TOKEN = `Bearer ${window.localStorage.getItem('loginToken')}`
+        axios.defaults.headers.common['Authorization'] = TOKEN
     }
     isAuthenticated(){
         return !!window.localStorage.getItem('loginToken')
