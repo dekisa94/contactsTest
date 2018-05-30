@@ -1,19 +1,21 @@
-import {authService} from './../service/AuthService'
+import { authService } from "./../service/AuthService";
 
-
-export function requiresAuth(to){
-    if(to.matched.some(record => record.meta.requiresAuth)){
-        if(!authService.isAuthenticated()){
-            return window.location.href= '/login'
-        }
-        authService.setAxiosDefaultAuthorizationHeader();
+export function requiresAuth(to) {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!authService.isAuthenticated()) {
+      return (window.location.href = "/login");
     }
-    return Promise.resolve(to)
+    authService.setAxiosDefaultAuthorizationHeader();
+  }
+  return Promise.resolve(to);
 }
 
-export function guestOnly(to){
-    if(to.matched.some(record => record.meta.questOnly) && authService.isAuthenticated()){
-        return Promise.reject({name: 'contacts'})
-    }
-    return Promise.resolve(to)
+export function guestOnly(to) {
+  if (
+    to.matched.some(record => record.meta.guestOnly) &&
+    authService.isAuthenticated()
+  ) {
+    return Promise.reject({ name: "contacts" });
+  }
+  return Promise.resolve(to);
 }
